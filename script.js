@@ -1,7 +1,7 @@
-/*
+
 const getPokemon = async () => {
   let arr = [];
-  for (let i = 1; i <= 9 ; i++) {
+  for (let i = 1; i <= 20 ; i++) {
     await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
       then(
         res => {
@@ -11,7 +11,7 @@ const getPokemon = async () => {
     }    
   return arr;
 }
-*/
+
 
 var currentPage = 1;
 var recordsPerPage = 2;
@@ -69,18 +69,9 @@ window.onload = function() {
   changePage(1);
 };
 
-const getPokemon = async () => {
-  let arr = [];
-  await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=10&limit=10`).
-  then(
-    res => {
-      let pokemon = res.data
-    });    
-  return arr;
-}
-
 getPokemon().then(pokeArr => {
   var ul = document.getElementById('pokemon-list');
+  ul.setAttribute('class', 'card-group')
   pokeArr.forEach((pokemon) => {
     // Create li and images
     var li = document.createElement('li');
