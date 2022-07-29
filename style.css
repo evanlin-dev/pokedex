@@ -1,4 +1,4 @@
-body{
+body {
     background-color: rgb(197, 197, 253);
 }
 
@@ -10,4 +10,8 @@ body{
     margin-bottom: 2rem;
 }
 
+.pokemon-container {
+    position: relative;
+    left: 2.3rem;
+}
   

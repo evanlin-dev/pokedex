@@ -1,7 +1,7 @@
 
 const getPokemon = async () => {
   let arr = [];
-  for (let i = 1; i <= 20 ; i++) {
+  for (let i = 1; i <= 24 ; i++) {
     await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
       then(
         res => {
@@ -65,29 +65,29 @@ function numPages()
   return Math.ceil(objJson.length / recordsPerPage);
 }
 
+/*
 window.onload = function() {
   changePage(1);
 };
+*/
 
 getPokemon().then(pokeArr => {
-  var ul = document.getElementById('pokemon-list');
-  ul.setAttribute('class', 'card-group')
   pokeArr.forEach((pokemon) => {
-    // Create li and images
-    var li = document.createElement('li');
+    // Create card and sprite
+    var card = document.createElement('div');
     var sprite = document.createElement('img');
 
     // Capitalize first letter
     const pokeNameUpper = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
 
-    // Set values of li and images
+    // Set values of card and sprite
     sprite.setAttribute('src', pokemon.sprites.front_default);
     sprite.setAttribute('class', 'card-img-top');
-    li.appendChild(sprite)
+    card.appendChild(sprite)
 
-    // Set class and style of the li
-    li.setAttribute('class', 'pokemon-list-item card')
-    li.setAttribute('style', 'width: 15rem;')
+    // Set class and style of the card
+    card.setAttribute('class', 'card')
+    card.setAttribute('style', 'width: 15rem;')
 
     // Card body
     var cardBody = document.createElement('div');
@@ -98,11 +98,14 @@ getPokemon().then(pokeArr => {
     cardTitle.setAttribute('class', 'card-title')
     cardTitle.appendChild(document.createTextNode(pokemon.id + ') ' + pokeNameUpper))
 
-    // Append to li
+    // Append to card
     cardBody.appendChild(cardTitle)
-    li.appendChild(cardBody);
+    card.appendChild(cardBody);
 
-    // Append them to the ul
-    ul.appendChild(li);
+    // Append them to the col
+    var col = document.createElement('div');
+    col.setAttribute('class', 'col');
+    col.appendChild(card);
+    document.getElementById('pokemon-container').appendChild(col)
   })
 });
