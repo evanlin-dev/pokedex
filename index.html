@@ -12,16 +12,12 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-  <div class="container-fluid pt-4">
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-6 g-0 pokemon-container" id="pokemon-container">
-      </div>
+  <div class="container-fluid pt-4" id="main-container">
+    <div id="listingTable"></div>
   </div>
-  <div class="text-center">
-    <div id="listing-table"></div>
-    <a class="btn btn-primary my-3" href="javascript:prevPage()" id="btn-prev">Previous Page</a>
-    <a class="btn btn-primary my-3" href="javascript:nextPage()" id="btn-next">Next Page</a>
-  </div>
-
+  <a class="btn btn-primary" href="javascript:prevPage()" id="btn_prev">Prev</a>
+  <a class="btn btn-primary" href="javascript:nextPage()" id="btn_next">Next</a>
+  page: <span id="page"></span>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
