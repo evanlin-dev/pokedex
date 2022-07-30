@@ -27,7 +27,7 @@ const getPokemon = async (currentPage) => {
       }    
   }
   else {
-    for (let i = 25*(currentPage-1); i <= 24*currentPage; i++) {
+    for (let i = 24*(currentPage-1)+1; i <= 24*currentPage; i++) {
       await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
         then(
           res => {
