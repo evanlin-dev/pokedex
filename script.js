@@ -14,15 +14,28 @@ const getPokemon = async () => {
 */
 // Create an array for the pokemon
 const getPokemon = async (currentPage) => {
+  console.log("Emptied array");
   let arr = [];
-  for (let i = 1*currentPage; i <= 24*currentPage; i++) {
-    await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
-      then(
-        res => {
-          let pokemon = res.data;
-          arr.push({...pokemon});
-        });
-    }    
+  if(currentPage == 1){
+    for (let i = 1; i <= 24; i++) {
+      await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
+        then(
+          res => {
+            let pokemon = res.data;
+            arr.push({...pokemon});
+          });
+      }    
+  }
+  else {
+    for (let i = 25*(currentPage-1); i <= 24*currentPage; i++) {
+      await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
+        then(
+          res => {
+            let pokemon = res.data;
+            arr.push({...pokemon});
+          });
+      }    
+  }
   return arr;
 }
 
@@ -74,24 +87,26 @@ const renderDisplay = async (currentPage) => {
 
 
 var current_page = 1;
-var records_per_page = 12;
+var records_per_page = 24;
 
 var objJson = getPokemon(current_page);
+console.log(objJson);
+
 
 function prevPage()
 {
-    if (current_page > 1) {
-        current_page--;
-        changePage(current_page);
-    }
+  console.log("Prev Button Check");
+  current_page--;
+  changePage(current_page);
+  console.log("Page back");
 }
 
 function nextPage()
-{
-    if (current_page < numPages()) {
-        current_page++;
-        changePage(current_page);
-    }
+{ 
+  console.log("Next Button Check");
+  current_page++;
+  changePage(current_page);
+  console.log("Page forward");
 }
 
 function changePage(page)
@@ -107,7 +122,7 @@ function changePage(page)
 
     listing_table.innerHTML = "";
 
-    renderDisplay(current_page);
+    renderDisplay(page);
     page_span.innerHTML = page;
 
     if (page == 1) {
