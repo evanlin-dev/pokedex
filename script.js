@@ -66,11 +66,14 @@ const renderDisplay = async (currentPage) => {
       cardBody.setAttribute('class', 'card-body'); 
 
       // Modal
+      var modalInt = `pokemon-modal-${pokemon.id}`;
+      var modalAria = `pokemon-modal-label-${pokemon.id}`;
+
       var modal = document.createElement('div');
       modal.setAttribute('class', 'modal fade');
-      modal.setAttribute('id', 'pokemon-modal');
+      modal.setAttribute('id', modalInt);
       modal.setAttribute('tabindex', '-1');
-      modal.setAttribute('aria-labelledby', 'pokemon-modal-label');
+      modal.setAttribute('aria-labelledby', modalAria);
       modal.setAttribute('aria-hidden', 'true');
 
       var modalDialog = document.createElement('div');
@@ -84,12 +87,14 @@ const renderDisplay = async (currentPage) => {
 
       var modalBody = document.createElement('div');
       modalBody.setAttribute('class', 'modal-body');
-      modalBody.innerHTML = pokeNameUpper;
+      modalBody.appendChild(document.createTextNode('Types ' + pokemon.type));
+      console.log(modalBody);
 
       var modalTitle = document.createElement('h5');
       modalTitle.setAttribute('class', 'modal-title');
-      modalTitle.setAttribute('id', 'pokemon-modal-label');
-      modalTitle.innerHTML = pokeNameUpper;
+      modalTitle.setAttribute('id', modalAria);
+      modalTitle.appendChild(document.createTextNode(pokemon.id + ') ' + pokeNameUpper))
+      console.log(modalTitle);
 
       var btnClose = document.createElement('btn');
       btnClose.setAttribute('class', 'btn-close');
@@ -101,7 +106,7 @@ const renderDisplay = async (currentPage) => {
       var btn = document.createElement('button');
       btn.setAttribute('class', 'btn btn-primary');
       btn.setAttribute('data-bs-toggle', 'modal');
-      btn.setAttribute('data-bs-target', '#pokemon-modal');
+      btn.setAttribute('data-bs-target', '#' + modalInt);
       btn.setAttribute('type', 'button');
       btn.innerHTML = 'Info';
 
@@ -138,8 +143,6 @@ var current_page = 1;
 var recordsPerPage = 24;
 
 var objJson = getPokemon(current_page);
-console.log(objJson);
-
 
 function prevPage()
 {
