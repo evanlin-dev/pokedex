@@ -14,7 +14,6 @@ const getPokemon = async () => {
 */
 // Create an array for the pokemon
 const getPokemon = async (currentPage) => {
-  console.log("Emptied array");
   let arr = [];
   if(currentPage == 1){
     for (let i = 1; i <= 24; i++) {
@@ -81,13 +80,12 @@ const renderDisplay = async (currentPage) => {
       col.appendChild(card);
       row.appendChild(col)
     })
-    document.getElementById('listingTable').appendChild(row)
+    document.getElementById('listing-table').appendChild(row)
   });
 }
 
-
 var current_page = 1;
-var records_per_page = 24;
+var recordsPerPage = 24;
 
 var objJson = getPokemon(current_page);
 console.log(objJson);
@@ -95,52 +93,48 @@ console.log(objJson);
 
 function prevPage()
 {
-  console.log("Prev Button Check");
   current_page--;
   changePage(current_page);
-  console.log("Page back");
 }
 
 function nextPage()
 { 
-  console.log("Next Button Check");
   current_page++;
   changePage(current_page);
-  console.log("Page forward");
 }
 
 function changePage(page)
 {
-    var btn_next = document.getElementById("btn_next");
-    var btn_prev = document.getElementById("btn_prev");
-    var listing_table = document.getElementById("listingTable");
-    var page_span = document.getElementById("page");
+  var btnPrev = document.getElementById('btn-prev');
+  var btnNext = document.getElementById('btn-next');
+  var listing_table = document.getElementById('listing-table');
+  var page_span = document.getElementById('page');
 
-    // Validate page
-    if (page < 1) page = 1;
-    if (page > numPages()) page = numPages();
+  // Validate page
+  if (page < 1) page = 1;
+  if (page > numPages()) page = numPages();
 
-    listing_table.innerHTML = "";
+  listing_table.innerHTML = '';
 
-    renderDisplay(page);
-    page_span.innerHTML = page;
+  renderDisplay(page);
+  page_span.innerHTML = page;
 
-    if (page == 1) {
-        btn_prev.style.visibility = "hidden";
-    } else {
-        btn_prev.style.visibility = "visible";
-    }
+  if (page == 1) {
+    btnPrev.style.visibility = 'hidden';
+  } else {
+    btnPrev.style.visibility = 'visible';
+  }
 
-    if (page == numPages()) {
-        btn_next.style.visibility = "hidden";
-    } else {
-        btn_next.style.visibility = "visible";
-    }
+  if (page == numPages()) {
+    btnNext.style.visibility = 'hidden';
+  } else {
+    btnNext.style.visibility = 'visible';
+  }
 }
 
 function numPages()
 {
-    return Math.ceil(objJson.length / records_per_page);
+    return Math.ceil(objJson.length / recordsPerPage);
 }
 
 window.onload = function() {
