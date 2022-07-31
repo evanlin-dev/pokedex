@@ -18,6 +18,10 @@ img{
     background-color: rgb(235, 232, 232);
 }
 
-.container-fluid{
-    
+.modal-title{
+    color: black;
+}
+
+.modal-body{
+    color: black;
 }

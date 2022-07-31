@@ -63,7 +63,55 @@ const renderDisplay = async (currentPage) => {
 
       // Card body
       var cardBody = document.createElement('div');
-      cardBody.setAttribute('class', 'card-body');
+      cardBody.setAttribute('class', 'card-body'); 
+
+      // Modal
+      var modal = document.createElement('div');
+      modal.setAttribute('class', 'modal fade');
+      modal.setAttribute('id', 'pokemon-modal');
+      modal.setAttribute('tabindex', '-1');
+      modal.setAttribute('aria-labelledby', 'pokemon-modal-label');
+      modal.setAttribute('aria-hidden', 'true');
+
+      var modalDialog = document.createElement('div');
+      modalDialog.setAttribute('class', 'modal-dialog');
+
+      var modalContent = document.createElement('div');
+      modalContent.setAttribute('class', 'modal-content');
+
+      var modalHeader = document.createElement('div');
+      modalHeader.setAttribute('class', 'modal-header');
+
+      var modalBody = document.createElement('div');
+      modalBody.setAttribute('class', 'modal-body');
+      modalBody.innerHTML = pokeNameUpper;
+
+      var modalTitle = document.createElement('h5');
+      modalTitle.setAttribute('class', 'modal-title');
+      modalTitle.setAttribute('id', 'pokemon-modal-label');
+      modalTitle.innerHTML = pokeNameUpper;
+
+      var btnClose = document.createElement('btn');
+      btnClose.setAttribute('class', 'btn-close');
+      btnClose.setAttribute('type', 'button');
+      btnClose.setAttribute('data-bs-dismiss', 'modal');
+      btnClose.setAttribute('aria-label', 'Close')
+
+      // Button
+      var btn = document.createElement('button');
+      btn.setAttribute('class', 'btn btn-primary');
+      btn.setAttribute('data-bs-toggle', 'modal');
+      btn.setAttribute('data-bs-target', '#pokemon-modal');
+      btn.setAttribute('type', 'button');
+      btn.innerHTML = 'Info';
+
+      // Append
+      modalHeader.appendChild(modalTitle);
+      modalHeader.appendChild(btnClose);
+      modalContent.appendChild(modalHeader);
+      modalContent.appendChild(modalBody);
+      modalDialog.appendChild(modalContent);
+      modal.appendChild(modalDialog);
 
       // Card title
       var cardTitle = document.createElement('h5');
@@ -71,6 +119,8 @@ const renderDisplay = async (currentPage) => {
       cardTitle.appendChild(document.createTextNode(pokemon.id + ') ' + pokeNameUpper))
 
       // Append to card
+      cardBody.appendChild(modal);
+      cardBody.appendChild(btn);
       cardBody.appendChild(cardTitle)
       card.appendChild(cardBody);
 
