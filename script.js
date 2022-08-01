@@ -15,26 +15,14 @@ const getPokemon = async () => {
 // Create an array for the pokemon
 const getPokemon = async (currentPage) => {
   let arr = [];
-  if(currentPage == 1){
-    for (let i = 1; i <= 24; i++) {
-      await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
-        then(
-          res => {
-            let pokemon = res.data;
-            arr.push({...pokemon});
-          });
-      }    
-  }
-  else {
-    for (let i = 24*(currentPage-1)+1; i <= 24*currentPage; i++) {
-      await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
-        then(
-          res => {
-            let pokemon = res.data;
-            arr.push({...pokemon});
-          });
-      }    
-  }
+  for (let i = 24*(currentPage-1)+1; i <= 24*currentPage; i++) {
+    await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).
+      then(
+        res => {
+          let pokemon = res.data;
+          arr.push({...pokemon});
+        });
+  }    
   return arr;
 }
 
@@ -87,14 +75,14 @@ const renderDisplay = async (currentPage) => {
 
       var modalBody = document.createElement('div');
       modalBody.setAttribute('class', 'modal-body');
-      modalBody.appendChild(document.createTextNode('Types ' + pokemon.type));
-      console.log(modalBody);
+      modalBody.appendChild(document.createTextNode('Height: ' + pokemon.height/10 + ' m'));
+      modalBody.appendChild(document.createElement('br'));
+      modalBody.appendChild(document.createTextNode('Weight: ' + pokemon.weight/10 + ' kg'));
 
       var modalTitle = document.createElement('h5');
       modalTitle.setAttribute('class', 'modal-title');
       modalTitle.setAttribute('id', modalAria);
       modalTitle.appendChild(document.createTextNode(pokemon.id + ') ' + pokeNameUpper))
-      console.log(modalTitle);
 
       var btnClose = document.createElement('btn');
       btnClose.setAttribute('class', 'btn-close');
@@ -160,17 +148,17 @@ function changePage(page)
 {
   var btnPrev = document.getElementById('btn-prev');
   var btnNext = document.getElementById('btn-next');
-  var listing_table = document.getElementById('listing-table');
-  var page_span = document.getElementById('page');
+  var listingTable = document.getElementById('listing-table');
+  var pageSpan = document.getElementById('page');
 
   // Validate page
   if (page < 1) page = 1;
   if (page > numPages()) page = numPages();
 
-  listing_table.innerHTML = '';
+  listingTable.innerHTML = '';
 
   renderDisplay(page);
-  page_span.innerHTML = page;
+  pageSpan.innerHTML = page;
 
   if (page == 1) {
     btnPrev.style.visibility = 'hidden';
